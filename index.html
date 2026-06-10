@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Velona | Gebäude Reinigung</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0a0a0a;
+      font-family: 'Inter', sans-serif;
+      color: #e0e0e0;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    main {
+      min-height: 100vh;
+      padding-top: 100px;
+    }
+
+    .fade-element {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    .fade-element.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    header {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 1300px;
+      background: rgba(18, 18, 24, 0.85);
+      backdrop-filter: blur(12px);
+      border-radius: 60px;
+      padding: 0.7rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(80, 80, 90, 0.4);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      height: 42px;
+      width: auto;
+      display: block;
+    }
+
+    .logo-text h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff, #aaaaaa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    .logo-text p {
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      color: #9a9a9a;
+      margin-top: 2px;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #dddddd;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: 0.2s;
+      padding: 8px 0;
+      position: relative;
+    }
+
+    nav ul li a:hover {
+      color: #ffffff;
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #c0c0c0;
+      transition: width 0.2s ease;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #e0e0e0;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 0.7rem 1.5rem;
+        width: 92%;
+      }
+      .logo-img {
+        height: 34px;
+      }
+      .logo-text h1 {
+        font-size: 1.2rem;
+      }
+      .menu-icon {
+        display: block;
+      }
+      nav {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 15, 20, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 0 0 24px 24px;
+        padding: 1.5rem;
+        transform: translateY(-150%);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        z-index: 999;
+        box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+        border-bottom: 1px solid #2a2a2a;
+      }
+      nav.active {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      nav ul {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+      }
+      nav ul li a {
+        font-size: 1.2rem;
+      }
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: clamp(2.5rem, 7vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(125deg, #f0f0f0, #b0b0b0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 750px;
+      margin: 1rem auto;
+      color: #b0b0b0;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      background: #2a2a2f;
+      padding: 0.9rem 2.2rem;
+      border-radius: 40px;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: all 0.2s;
+      border: 1px solid #4a4a55;
+    }
+
+    .btn:hover {
+      background: #3a3a42;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section h3 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: #eaeaea;
+      border-left: 4px solid #6b6b6b;
+      padding-left: 1.2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: #151518;
+      border-radius: 28px;
+      padding: 2rem;
+      transition: 0.25s;
+      border: 1px solid #26262c;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      background: #1c1c22;
+      border-color: #4a4a55;
+    }
+
+    .card i {
+      font-size: 2.5rem;
+      color: #b0b0b0;
+      margin-bottom: 1rem;
+    }
+
+    .card h4 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .card p {
+      color: #a5a5aa;
+    }
+
+    .contact-detail {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      background: #08080a;
+      border-top: 1px solid #202024;
+      padding: 3rem 2rem 2rem;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .footer-col h4 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .footer-col p, .footer-col a {
+      color: #8a8a8a;
+      text-decoration: none;
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    .footer-col a:hover {
+      color: #ffffff;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      font-size: 0.8rem;
+      color: #5a5a60;
+      border-top: 1px solid #1a1a20;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 720px) {
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .section {
+        padding: 3rem 1.5rem;
+      }
+      .hero {
+        padding: 2rem 1.5rem 4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Velona Logo" class="logo-img" onerror="this.style.display='none'">
+    <div class="logo-text">
+      <h1>Velona</h1>
+      <p>Gebäude Reinigung</p>
+    </div>
+  </div>
+  <div class="menu-icon" id="menuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+  <nav id="navMenu">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">Über uns</a></li>
+      <li><a href="/kontakt">Kontakt</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero fade-element">
+    <h2>Velona Gebäude Reinigung</h2>
+    <p>Ihr zuverlässiger Partner für strahlende Sauberkeit – ob im Unternehmen, in privaten Haushalten oder bei Jugend- und Bildungseinrichtungen. Bei uns zählt jedes Detail, damit Sie sich rundum wohlfühlen.</p>
+    <a href="/kontakt" class="btn">Kontakt aufnehmen <i class="fas fa-arrow-right"></i></a>
+  </section>
+
+  <section class="section fade-element">
+    <h3>Das bieten wir</h3>
+    <div class="grid">
+      <div class="card">
+        <i class="fas fa-building"></i>
+        <h4>Für Unternehmen</h4>
+        <p>Büros, Praxisräume, Geschäfte und Gewerbeflächen – wir sorgen für professionelle Hygiene und einen gepflegten ersten Eindruck bei Ihren Kunden.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-home"></i>
+        <h4>Für Privathaushalte</h4>
+        <p>Wohnungen, Häuser, Ferienwohnungen: Gründliche Reinigung nach Ihren Wünschen. Entlastung im Alltag mit höchstem Qualitätsanspruch.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-chalkboard-user"></i>
+        <h4>Für Jugend- & Bildungsträger</h4>
+        <p>Jugendtreffs, Schulen, Kindergärten – wir schaffen hygienisch einwandfreie Räume, in denen sich Kinder, Jugendliche und Teams wohlfühlen können.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section fade-element">
+    <h3>Unser Versprechen</h3>
+    <div class="grid">
+      <div class="card">
+        <i class="fas fa-hand-sparkles"></i>
+        <h4>Gründlich & Fair</h4>
+        <p>Wir verwenden moderne, umweltschonende Reinigungsmittel und arbeiten präzise, ohne Kompromisse bei der Sauberkeit.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-clock"></i>
+        <h4>Pünktlich & Flexibel</h4>
+        <p>Termine, die passen – ob regelmäßige Unterhaltsreinigung oder einmalige Grundreinigung. Wir richten uns nach Ihrem Zeitplan.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-star"></i>
+        <h4>100 % Zuverlässigkeit</h4>
+        <p>Freundliches, geschultes Personal und stetige Qualitätskontrollen machen uns zu Ihrem verlässlichen Reinigungspartner vor Ort.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section fade-element">
+    <h3>Kontakt & Anfahrt</h3>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+      <div class="card">
+        <i class="fas fa-phone-alt"></i>
+        <h4>Telefon</h4>
+        <p><strong>+49 171 9211444</strong></p>
+        <p class="contact-detail">Erreichbarkeit:<br>Mo–Fr: 09:00 – 19:00 Uhr<br>Samstag: 09:00 – 12:00 Uhr</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-envelope"></i>
+        <h4>E-Mail</h4>
+        <p>info@velona-reinigung.de</p>
+        <p class="contact-detail">Wir antworten innerhalb von 24 Stunden.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-location-dot"></i>
+        <h4>Adresse</h4>
+        <p><strong>Seeweg 4</strong><br>87629 Füssen<br>Deutschland</p>
+        <p class="contact-detail">Besuche nach vorheriger Terminvereinbarung.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-col">
+      <h4>Velona Gebäude Reinigung</h4>
+      <p>Sauberkeit mit Charakter – für Unternehmen, Haushalte und Jugendtreffs. Immer nah an Ihren Bedürfnissen.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <p><a href="/">Home</a></p>
+      <p><a href="/about">Über uns</a></p>
+      <p><a href="/kontakt">Kontakt</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Rechtliches</h4>
+      <p><a href="/impressum">Impressum</a></p>
+      <p><a href="/datenschutz">Datenschutz</a></p>
+    </div>
+  </div>
+  <div class="copyright">
+    © 2026 Velona Gebäude Reinigung – Professionelle Sauberkeit in Füssen & Umgebung.
+  </div>
+</footer>
+
+<script>
+  (function() {
+    const menuIcon = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    if (menuIcon && navMenu) {
+      menuIcon.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navMenu.classList.toggle('active');
+      });
+      document.addEventListener('click', function(event) {
+        if (!navMenu.contains(event.target) && !menuIcon.contains(event.target) && navMenu.classList.contains('active')) {
+          navMenu.classList.remove('active');
+        }
+      });
+      const navLinks = navMenu.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+        });
+      });
+    }
+
+    const fadeElements = document.querySelectorAll('.fade-element');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
+    fadeElements.forEach(el => observer.observe(el));
+
+    const header = document.querySelector('header');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > lastScroll && currentScroll > 120) {
+        header.style.transform = 'translateX(-50%) translateY(-120%)';
+        header.style.opacity = '0';
+      } else {
+        header.style.transform = 'translateX(-50%) translateY(0)';
+        header.style.opacity = '1';
+      }
+      lastScroll = currentScroll;
+    });
+
+    const allInternalLinks = document.querySelectorAll('nav ul li a, .btn, .footer-col a');
+    allInternalLinks.forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href && (href === '/' || href === '/about' || href === '/kontakt' || href === '/impressum' || href === '/datenschutz')) {
+          e.preventDefault();
+          const targetPath = href;
+          window.location.href = targetPath;
+        }
+        else if (href && href.startsWith('#') && href.length > 1) {
+          e.preventDefault();
+          const targetId = href.substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            const offset = 90;
+            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({
+              top: elementPosition - offset,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
+    const style = document.createElement('style');
+    style.textContent = `
+      header {
+        transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1), opacity 0.3s ease;
+        will-change: transform;
+      }
+      @media (max-width: 768px) {
+        header {
+          top: 15px;
+        }
+      }
+      .logo-img {
+        object-fit: contain;
+      }
+    `;
+    document.head.appendChild(style);
+  })();
+</script>
+</body>
+</html>
