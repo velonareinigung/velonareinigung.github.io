@@ -26,14 +26,12 @@
       min-height: 100vh;
     }
 
-    /* Deaktiviere horizontales Scrollen */
     html, body {
       max-width: 100%;
       overflow-x: hidden;
       position: relative;
     }
 
-    /* Bessere Fade-In Animation */
     .fade-element {
       opacity: 0;
       transform: translateY(20px);
@@ -46,7 +44,6 @@
       transform: translateY(0);
     }
 
-    /* HEADER - clean, professionell */
     header {
       position: fixed;
       top: 20px;
@@ -162,7 +159,6 @@
       }
     }
 
-    /* DUNKLER HERO BEREICH mit Hintergrundbild */
     .hero-dark {
       background: linear-gradient(135deg, #0a0a10 0%, #16161e 100%);
       position: relative;
@@ -213,30 +209,34 @@
       line-height: 1.6;
     }
 
-    /* Button Gruppe oben */
     .button-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.2rem;
       justify-content: center;
       margin-top: 2rem;
     }
 
     .btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       background: #2c2c38;
       padding: 0.85rem 2rem;
       border-radius: 50px;
       text-decoration: none;
       color: white;
       font-weight: 500;
-      transition: 0.2s;
+      font-size: 1rem;
+      transition: all 0.25s ease;
       border: 1px solid #6a6a7a;
+      cursor: pointer;
     }
 
     .btn:hover {
       background: #3e3e4e;
       transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
     }
 
     .btn-whatsapp {
@@ -251,10 +251,9 @@
     .btn-whatsapp:hover {
       background: #20b859;
       transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(37, 211, 102, 0.3);
+      box-shadow: 0 6px 14px rgba(37, 211, 102, 0.35);
     }
 
-    /* WEISSER BEREICH (alles darunter) */
     .white-section {
       background: #ffffff;
     }
@@ -384,10 +383,10 @@
       font-size: 0.95rem;
     }
 
-    /* Footer Button unten */
     .footer-btn-container {
       text-align: center;
       margin: 2rem auto 1rem;
+      padding: 0 2rem;
     }
 
     .btn-large {
@@ -475,13 +474,15 @@
         min-height: 70vh;
         padding: 100px 1.5rem 60px;
       }
-      .btn-whatsapp, .btn {
+      .btn, .btn-whatsapp {
         padding: 0.75rem 1.5rem;
         font-size: 0.9rem;
       }
+      .btn-large {
+        padding: 0.85rem 2rem;
+      }
     }
 
-    /* Verhindert ungewolltes Zoomen auf Mobilgeräten (via meta viewport bereits) */
     button, a {
       -webkit-tap-highlight-color: transparent;
     }
@@ -512,19 +513,17 @@
 </header>
 
 <main>
-  <!-- DUNKLER HERO BEREICH mit Hintergrundbild header.png -->
   <section class="hero-dark fade-element">
     <div class="hero-content">
       <h2>Velona Reinigung</h2>
       <p>Ihre professionelle Reinigung aus <strong>Füssen</strong>. Für Kindergärten, Privathaushalte, Geschäfte und Gewerbe. Gründlich, zuverlässig und modern ausgestattet.</p>
       <div class="button-group">
-        <a href="/kontakt" class="btn">Kontakt aufnehmen <i class="fas fa-arrow-right"></i></a>
+        <a href="/kontakt" class="btn"><i class="fas fa-arrow-right"></i> Kontakt aufnehmen</a>
         <a href="#" class="btn-whatsapp" id="whatsappBtn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
       </div>
     </div>
   </section>
 
-  <!-- WEISSER BEREICH -->
   <div class="white-section">
     <div class="services-section fade-element">
       <h3>Unfassend. Professionell. Zuverlässig.</h3>
@@ -550,7 +549,7 @@
     <div class="info-block fade-element">
       <div class="info-text">
         <h3>Velona Reinigung – Ihr Partner in Füssen & Umgebung</h3>
-        <p>Wir sind ein etabliertes Reinigungsunternehmen mit Sitz in Füssen. Unser Team arbeitet mit Präzision und Leidenschaft, um Ihre Räume strahlend sauber zu hinterlassen – egal ob es sich um eine wöchentliche Unterhaltsreinigung, eine Grundreinigung oder eine spezielle Objektreinigung handelt.</p>
+        <p>Wir sind ein etabliertes Reinigungsunternehmen mit Sitz in Füssen. Unser Team arbeitet mit Präzision und höchster Sorgfalt, um Ihre Räume strahlend sauber zu hinterlassen – egal ob es sich um eine wöchentliche Unterhaltsreinigung, eine Grundreinigung oder eine spezielle Objektreinigung handelt.</p>
         <p>Dank unserer hochwertigen Geräte und individuellen Reinigungskonzepte garantieren wir ein perfektes Ergebnis. Von kleinen Wohnungen bis zu Gewerbeobjekten: Wir passen uns an Ihre Bedürfnisse an.</p>
         <ul class="info-list">
           <li><i class="fas fa-check-circle"></i> Kindergärten & Bildungseinrichtungen</li>
@@ -569,9 +568,8 @@
       </div>
     </div>
 
-    <!-- Zusätzlicher Button ganz unten -->
     <div class="footer-btn-container fade-element">
-      <a href="/kontakt" class="btn btn-large">Kontakt aufnehmen <i class="fas fa-arrow-right"></i></a>
+      <a href="/kontakt" class="btn btn-large"><i class="fas fa-arrow-right"></i> Kontakt aufnehmen</a>
     </div>
   </div>
 </main>
@@ -604,7 +602,6 @@
 
 <script>
   (function() {
-    // MOBILE MENU: Header dehnt sich fließend nach unten
     const menuToggle = document.getElementById('menuToggle');
     const navContainer = document.getElementById('navMenuContainer');
     const mainHeader = document.getElementById('mainHeader');
@@ -634,7 +631,6 @@
       });
     }
 
-    // Fade-In Observer
     const fadeElements = document.querySelectorAll('.fade-element');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -647,7 +643,6 @@
     }, { threshold: 0.12, rootMargin: "0px 0px -20px 0px" });
     fadeElements.forEach(el => observer.observe(el));
 
-    // Header ein-/ausblenden bei Scroll
     const header = document.querySelector('header');
     let lastScroll = 0;
     window.addEventListener('scroll', () => {
@@ -662,22 +657,21 @@
       lastScroll = currentScroll;
     });
 
-    // WhatsApp Button - Erklärung und Funktion
-    // Du musst hier deine echte WhatsApp Nummer eintragen!
-    // Format: International ohne +, aber mit Ländercode. Beispiel für Deutschland: 491719211444
-    // Für den Test nutze ich die Beispielnummer. Ersetze '491719211444' mit deiner echten Nummer!
-    const whatsappNumber = '491719211444'; // <-- HIER DEINE ECHTE WHATSAPP NUMMER EINTRAGEN (ohne +, mit Ländercode)
+    // WhatsApp Button - perfekt gestylt
+    // HIER MUSST DU DEINE ECHTE WHATSAPP NUMMER EINTRAGEN!
+    // Format: Ländercode + Nummer ohne führende Null, ohne Leerzeichen, ohne +
+    // Beispiel für Deutschland: 491719211444 (für +49 171 9211444)
+    const whatsappNumber = '491719211444'; // <-- ERSETZE DIES MIT DEINER ECHTEN WHATSAPP NUMMER
+    
     const whatsappBtn = document.getElementById('whatsappBtn');
     if (whatsappBtn) {
       whatsappBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        // Öffnet WhatsApp mit vordefinierter Nachricht
         const message = encodeURIComponent('Hallo Velona Team, ich habe eine Frage zu euren Reinigungsleistungen.');
         window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
       });
     }
 
-    // Interne Links als Page-Routing
     const allLinks = document.querySelectorAll('nav ul li a, .btn, .footer-col a');
     allLinks.forEach(anchor => {
       anchor.addEventListener('click', function(e) {
