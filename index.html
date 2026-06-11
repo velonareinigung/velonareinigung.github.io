@@ -2,9 +2,9 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Velona Reinigung | Füssen & Umgebung</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="icon" type="image/png" href="logo.png">
   <style>
@@ -15,19 +15,25 @@
     }
 
     body {
-      background: #f8f8f5;
+      background: #ffffff;
       font-family: 'Inter', sans-serif;
       color: #1a1a24;
       line-height: 1.5;
-      scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     main {
       min-height: 100vh;
-      padding-top: 100px;
     }
 
-    /* Bessere, butterweiche Fade-In Animation */
+    /* Deaktiviere horizontales Scrollen */
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Bessere Fade-In Animation */
     .fade-element {
       opacity: 0;
       transform: translateY(20px);
@@ -48,7 +54,7 @@
       transform: translateX(-50%);
       width: 90%;
       max-width: 1300px;
-      background: rgba(28, 28, 32, 0.92);
+      background: rgba(20, 20, 26, 0.95);
       backdrop-filter: blur(14px);
       border-radius: 60px;
       padding: 0.8rem 2rem;
@@ -57,15 +63,14 @@
       justify-content: space-between;
       z-index: 1000;
       transition: all 0.45s cubic-bezier(0.2, 0.95, 0.3, 1.1);
-      border: 1px solid rgba(220, 220, 230, 0.2);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(220, 220, 230, 0.15);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
     }
 
     header.menu-open {
       border-radius: 32px;
-      background: rgba(24, 24, 28, 0.98);
+      background: rgba(20, 20, 26, 0.98);
       padding: 0.8rem 2rem 1.4rem 2rem;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     }
 
     .logo {
@@ -120,7 +125,6 @@
       color: #e0e0e0;
     }
 
-    /* MOBILE: Header weitet sich nach unten aus */
     @media (max-width: 768px) {
       header {
         flex-wrap: wrap;
@@ -158,35 +162,70 @@
       }
     }
 
-    /* Hero */
-    .hero {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2rem 2rem 3rem;
+    /* DUNKLER HERO BEREICH mit Hintergrundbild */
+    .hero-dark {
+      background: linear-gradient(135deg, #0a0a10 0%, #16161e 100%);
+      position: relative;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      padding: 120px 2rem 80px;
+      margin-top: 0;
     }
 
-    .hero h2 {
-      font-size: clamp(2.5rem, 7vw, 4rem);
-      font-weight: 700;
-      color: #1e1e2a;
+    .hero-dark::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('header.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.25;
+      z-index: 0;
+    }
+
+    .hero-dark .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-dark h2 {
+      font-size: clamp(2.5rem, 7vw, 4.2rem);
+      font-weight: 800;
+      color: #ffffff;
       margin-bottom: 1rem;
       letter-spacing: -0.3px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
     }
 
-    .hero p {
+    .hero-dark p {
       font-size: 1.2rem;
-      max-width: 750px;
+      max-width: 650px;
       margin: 1rem auto;
-      color: #3a3a4a;
+      color: #dddde8;
       line-height: 1.6;
+    }
+
+    /* Button Gruppe oben */
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
     }
 
     .btn {
       display: inline-block;
-      margin-top: 1.8rem;
       background: #2c2c38;
-      padding: 0.85rem 2.4rem;
+      padding: 0.85rem 2rem;
       border-radius: 50px;
       text-decoration: none;
       color: white;
@@ -198,14 +237,32 @@
     .btn:hover {
       background: #3e3e4e;
       transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
     }
 
-    /* Eine Box mit 3 Säulen (Professionelle Leistungen) */
+    .btn-whatsapp {
+      background: #25D366;
+      border: none;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-whatsapp:hover {
+      background: #20b859;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(37, 211, 102, 0.3);
+    }
+
+    /* WEISSER BEREICH (alles darunter) */
+    .white-section {
+      background: #ffffff;
+    }
+
     .services-section {
       max-width: 1100px;
-      margin: 2rem auto 3rem;
-      padding: 0 2rem;
+      margin: 0 auto;
+      padding: 5rem 2rem;
     }
 
     .services-section h3 {
@@ -261,10 +318,9 @@
       line-height: 1.5;
     }
 
-    /* Info + Kontaktbereich */
     .info-block {
       max-width: 1100px;
-      margin: 2rem auto 3rem;
+      margin: 0 auto 3rem;
       padding: 0 2rem;
       display: flex;
       flex-wrap: wrap;
@@ -274,7 +330,7 @@
 
     .info-text {
       flex: 2;
-      background: #ffffff;
+      background: #fcfcfc;
       border-radius: 28px;
       padding: 2rem;
       border: 1px solid #e8e8f0;
@@ -328,12 +384,22 @@
       font-size: 0.95rem;
     }
 
-    /* Footer mit Logo */
+    /* Footer Button unten */
+    .footer-btn-container {
+      text-align: center;
+      margin: 2rem auto 1rem;
+    }
+
+    .btn-large {
+      padding: 1rem 2.8rem;
+      font-size: 1.1rem;
+    }
+
     footer {
       background: #101014;
       border-top: 1px solid #2a2a30;
       padding: 3rem 2rem 2rem;
-      margin-top: 4rem;
+      margin-top: 2rem;
       color: #ccc;
     }
 
@@ -405,6 +471,19 @@
       .footer-logo-area {
         justify-content: center;
       }
+      .hero-dark {
+        min-height: 70vh;
+        padding: 100px 1.5rem 60px;
+      }
+      .btn-whatsapp, .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Verhindert ungewolltes Zoomen auf Mobilgeräten (via meta viewport bereits) */
+    button, a {
+      -webkit-tap-highlight-color: transparent;
     }
   </style>
 </head>
@@ -433,54 +512,66 @@
 </header>
 
 <main>
-  <section class="hero fade-element">
-    <h2>Velona Reinigung</h2>
-    <p>Ihre professionelle Reinigung aus <strong>Füssen</strong>. Für Kindergärten, Privathaushalte, Geschäfte und Gewerbe. Gründlich, zuverlässig und modern ausgestattet.</p>
-    <a href="/kontakt" class="btn">Kontakt aufnehmen <i class="fas fa-arrow-right"></i></a>
+  <!-- DUNKLER HERO BEREICH mit Hintergrundbild header.png -->
+  <section class="hero-dark fade-element">
+    <div class="hero-content">
+      <h2>Velona Reinigung</h2>
+      <p>Ihre professionelle Reinigung aus <strong>Füssen</strong>. Für Kindergärten, Privathaushalte, Geschäfte und Gewerbe. Gründlich, zuverlässig und modern ausgestattet.</p>
+      <div class="button-group">
+        <a href="/kontakt" class="btn">Kontakt aufnehmen <i class="fas fa-arrow-right"></i></a>
+        <a href="#" class="btn-whatsapp" id="whatsappBtn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      </div>
+    </div>
   </section>
 
-  <!-- Nur eine Box mit 3 Säulen (Leistungen / Kompetenz) -->
-  <div class="services-section fade-element">
-    <h3>Unfassend. Professionell. Zuverlässig.</h3>
-    <div class="service-grid">
-      <div class="service-card">
-        <i class="fas fa-broom"></i>
-        <h4>Perfekte Ausstattung</h4>
-        <p>Modernste Reinigungstechnik, professionelle Mittel und langjährige Erfahrung – jedes Objekt wird makellos sauber.</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-building"></i>
-        <h4>Alle Objekte im Fokus</h4>
-        <p>Kindergärten, Privathäuser, Büros, Ladengeschäfte – wir reinigen gewissenhaft, flexibel und nach Ihren Vorgaben.</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-calendar-check"></i>
-        <h4>Termintreu & fair</h4>
-        <p>Feste Zusagen, transparente Preise und höchste Sorgfalt. Ihr Vertrauen ist unser Erfolg.</p>
+  <!-- WEISSER BEREICH -->
+  <div class="white-section">
+    <div class="services-section fade-element">
+      <h3>Unfassend. Professionell. Zuverlässig.</h3>
+      <div class="service-grid">
+        <div class="service-card">
+          <i class="fas fa-broom"></i>
+          <h4>Perfekte Ausstattung</h4>
+          <p>Modernste Reinigungstechnik, professionelle Mittel und langjährige Erfahrung – jedes Objekt wird makellos sauber.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-building"></i>
+          <h4>Alle Objekte im Fokus</h4>
+          <p>Kindergärten, Privathäuser, Büros, Ladengeschäfte – wir reinigen gewissenhaft, flexibel und nach Ihren Vorgaben.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-calendar-check"></i>
+          <h4>Termintreu & fair</h4>
+          <p>Feste Zusagen, transparente Preise und höchste Sorgfalt. Ihr Vertrauen ist unser Erfolg.</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Detaillierter Überblick: Leistungen & Kontakt -->
-  <div class="info-block fade-element">
-    <div class="info-text">
-      <h3>Velona Reinigung – Ihr Partner in Füssen & Umgebung</h3>
-      <p>Wir sind ein etabliertes Reinigungsunternehmen mit Sitz in Füssen. Unser Team arbeitet mit Präzision und Leidenschaft, um Ihre Räume strahlend sauber zu hinterlassen – egal ob es sich um eine wöchentliche Unterhaltsreinigung, eine Grundreinigung oder eine spezielle Objektreinigung handelt.</p>
-      <p>Dank unserer hochwertigen Geräte und individuellen Reinigungskonzepte garantieren wir ein perfektes Ergebnis. Von kleinen Wohnungen bis zu Gewerbeobjekten: Wir passen uns an Ihre Bedürfnisse an.</p>
-      <ul class="info-list">
-        <li><i class="fas fa-check-circle"></i> Kindergärten & Bildungseinrichtungen</li>
-        <li><i class="fas fa-check-circle"></i> Private Haushalte & Wohnungen</li>
-        <li><i class="fas fa-check-circle"></i> Geschäfte, Praxisräume & Büros</li>
-        <li><i class="fas fa-check-circle"></i> Individuelle Sonderreinigungen</li>
-      </ul>
+    <div class="info-block fade-element">
+      <div class="info-text">
+        <h3>Velona Reinigung – Ihr Partner in Füssen & Umgebung</h3>
+        <p>Wir sind ein etabliertes Reinigungsunternehmen mit Sitz in Füssen. Unser Team arbeitet mit Präzision und Leidenschaft, um Ihre Räume strahlend sauber zu hinterlassen – egal ob es sich um eine wöchentliche Unterhaltsreinigung, eine Grundreinigung oder eine spezielle Objektreinigung handelt.</p>
+        <p>Dank unserer hochwertigen Geräte und individuellen Reinigungskonzepte garantieren wir ein perfektes Ergebnis. Von kleinen Wohnungen bis zu Gewerbeobjekten: Wir passen uns an Ihre Bedürfnisse an.</p>
+        <ul class="info-list">
+          <li><i class="fas fa-check-circle"></i> Kindergärten & Bildungseinrichtungen</li>
+          <li><i class="fas fa-check-circle"></i> Private Haushalte & Wohnungen</li>
+          <li><i class="fas fa-check-circle"></i> Geschäfte, Praxisräume & Büros</li>
+          <li><i class="fas fa-check-circle"></i> Individuelle Sonderreinigungen</li>
+        </ul>
+      </div>
+      <div class="contact-card">
+        <h4><i class="fas fa-phone-alt"></i> Kontakt</h4>
+        <p><strong>+49 171 9211444</strong></p>
+        <p>Mo–Fr: 09:00 – 19:00 Uhr<br>Sa: 09:00 – 12:00 Uhr</p>
+        <p><i class="fas fa-envelope"></i> info@velona-reinigung.de</p>
+        <p><i class="fas fa-map-marker-alt"></i> Seeweg 4, 87629 Füssen</p>
+        <p style="margin-top: 14px;">✓ Kostenlose Angebote<br>✓ Schnelle Terminabsprache</p>
+      </div>
     </div>
-    <div class="contact-card">
-      <h4><i class="fas fa-phone-alt"></i> Kontakt</h4>
-      <p><strong>+49 171 9211444</strong></p>
-      <p>Mo–Fr: 09:00 – 19:00 Uhr<br>Sa: 09:00 – 12:00 Uhr</p>
-      <p><i class="fas fa-envelope"></i> info@velona-reinigung.de</p>
-      <p><i class="fas fa-map-marker-alt"></i> Seeweg 4, 87629 Füssen</p>
-      <p style="margin-top: 14px;">✓ Kostenlose Angebote<br>✓ Schnelle Terminabsprache</p>
+
+    <!-- Zusätzlicher Button ganz unten -->
+    <div class="footer-btn-container fade-element">
+      <a href="/kontakt" class="btn btn-large">Kontakt aufnehmen <i class="fas fa-arrow-right"></i></a>
     </div>
   </div>
 </main>
@@ -513,7 +604,7 @@
 
 <script>
   (function() {
-    // MOBILE MENU: Header dehnt sich fließend nach unten (kein externer Frame)
+    // MOBILE MENU: Header dehnt sich fließend nach unten
     const menuToggle = document.getElementById('menuToggle');
     const navContainer = document.getElementById('navMenuContainer');
     const mainHeader = document.getElementById('mainHeader');
@@ -543,7 +634,7 @@
       });
     }
 
-    // Bessere Fade-In Observer (weicher, flüssiger)
+    // Fade-In Observer
     const fadeElements = document.querySelectorAll('.fade-element');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -571,7 +662,22 @@
       lastScroll = currentScroll;
     });
 
-    // Interne Links als Page-Routing (keine externen Sprünge)
+    // WhatsApp Button - Erklärung und Funktion
+    // Du musst hier deine echte WhatsApp Nummer eintragen!
+    // Format: International ohne +, aber mit Ländercode. Beispiel für Deutschland: 491719211444
+    // Für den Test nutze ich die Beispielnummer. Ersetze '491719211444' mit deiner echten Nummer!
+    const whatsappNumber = '491719211444'; // <-- HIER DEINE ECHTE WHATSAPP NUMMER EINTRAGEN (ohne +, mit Ländercode)
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    if (whatsappBtn) {
+      whatsappBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Öffnet WhatsApp mit vordefinierter Nachricht
+        const message = encodeURIComponent('Hallo Velona Team, ich habe eine Frage zu euren Reinigungsleistungen.');
+        window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+      });
+    }
+
+    // Interne Links als Page-Routing
     const allLinks = document.querySelectorAll('nav ul li a, .btn, .footer-col a');
     allLinks.forEach(anchor => {
       anchor.addEventListener('click', function(e) {
