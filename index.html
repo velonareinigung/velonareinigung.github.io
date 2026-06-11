@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Velona | Gebäudereinigung</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <title>Velona Reinigung | Füssen & Umgebung</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="icon" type="image/png" href="logo.png">
   <style>
@@ -15,12 +15,11 @@
     }
 
     body {
-      background-color: #0a0a0a;
+      background: #f5f5f0;
       font-family: 'Inter', sans-serif;
-      color: #e0e0e0;
+      color: #1e1e2a;
       line-height: 1.5;
       scroll-behavior: smooth;
-      overflow-x: hidden;
     }
 
     main {
@@ -28,21 +27,10 @@
       padding-top: 100px;
     }
 
-    /* Partikel Canvas */
-    #particleCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
     .fade-element {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      transform: translateY(25px);
+      transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1), transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1);
     }
 
     .fade-element.visible {
@@ -50,7 +38,7 @@
       transform: translateY(0);
     }
 
-    /* Header - dynamisch erweiterbar */
+    /* HEADER (gleich, smooth) */
     header {
       position: fixed;
       top: 20px;
@@ -58,66 +46,53 @@
       transform: translateX(-50%);
       width: 90%;
       max-width: 1300px;
-      background: rgba(12, 12, 18, 0.7);
-      backdrop-filter: blur(16px);
-      border-radius: 80px;
-      padding: 0.7rem 2rem;
+      background: rgba(30, 30, 35, 0.92);
+      backdrop-filter: blur(14px);
+      border-radius: 60px;
+      padding: 0.8rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
       z-index: 1000;
-      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2);
-      border: 1px solid rgba(100, 100, 130, 0.4);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 15px rgba(120, 120, 200, 0.1);
+      transition: all 0.45s cubic-bezier(0.2, 0.95, 0.3, 1.1);
+      border: 1px solid rgba(200, 200, 200, 0.25);
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
     }
 
-    /* Erweiterter Zustand für mobiles Menü */
+    /* Wenn Menü geöffnet (mobile) - Header streckt sich nach unten */
     header.menu-open {
       border-radius: 32px;
-      background: rgba(10, 10, 16, 0.95);
-      backdrop-filter: blur(20px);
-      padding: 1.2rem 2rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(150, 100, 220, 0.3);
+      background: rgba(25, 25, 30, 0.97);
+      padding: 0.8rem 2rem 1.4rem 2rem;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 14px;
     }
 
     .logo-img {
-      height: 65px;
+      height: 50px;
       width: auto;
       display: block;
-      filter: drop-shadow(0 0 6px rgba(200, 200, 255, 0.3));
-      transition: transform 0.2s;
-    }
-
-    .logo-img:hover {
-      transform: scale(1.02);
     }
 
     .logo-text h1 {
-      font-size: 1.6rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #ffffff, #c0c0e0);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.3px;
-      text-shadow: 0 0 5px rgba(255,255,255,0.2);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f0f0f0;
+      letter-spacing: -0.2px;
     }
 
     .logo-text p {
-      font-size: 0.7rem;
-      letter-spacing: 1.2px;
-      color: #aaaac0;
-      margin-top: 4px;
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+      color: #bcbcbc;
+      margin-top: 2px;
     }
 
-    /* Desktop Navigation */
     nav ul {
       display: flex;
       gap: 2rem;
@@ -126,32 +101,15 @@
 
     nav ul li a {
       text-decoration: none;
-      color: #e0e0f0;
+      color: #eaeaea;
       font-weight: 500;
       font-size: 1rem;
       transition: 0.2s;
-      padding: 8px 0;
-      position: relative;
+      padding: 6px 0;
     }
 
     nav ul li a:hover {
       color: #ffffff;
-      text-shadow: 0 0 8px rgba(180, 180, 255, 0.6);
-    }
-
-    nav ul li a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #aaaaff, #ccccff);
-      transition: width 0.25s ease;
-    }
-
-    nav ul li a:hover::after {
-      width: 100%;
     }
 
     .menu-icon {
@@ -159,23 +117,18 @@
       font-size: 1.8rem;
       cursor: pointer;
       color: #e0e0e0;
-      transition: all 0.2s;
-      padding: 8px;
+      transition: 0.2s;
     }
 
-    .menu-icon:hover {
-      color: #ffffff;
-      text-shadow: 0 0 10px rgba(200,200,255,0.8);
-    }
-
-    /* Mobile Menu Animation - Smooth */
+    /* MOBILE: Header stretcht sich, Menü erscheint INNERHALB des Headers */
     @media (max-width: 768px) {
       header {
-        padding: 0.7rem 1.5rem;
+        flex-wrap: wrap;
+        padding: 0.8rem 1.5rem;
         width: 92%;
       }
       .logo-img {
-        height: 55px;
+        height: 44px;
       }
       .logo-text h1 {
         font-size: 1.3rem;
@@ -183,157 +136,211 @@
       .menu-icon {
         display: block;
       }
-      nav {
-        position: fixed;
-        top: 85px;
-        left: 50%;
-        transform: translateX(-50%) scaleY(0);
-        transform-origin: top;
-        width: 90%;
-        background: rgba(12, 12, 20, 0.98);
-        backdrop-filter: blur(24px);
-        border-radius: 32px;
-        padding: 0;
-        opacity: 0;
-        transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2), opacity 0.3s ease;
-        z-index: 999;
-        box-shadow: 0 25px 40px rgba(0,0,0,0.5);
-        border: 1px solid rgba(150, 150, 200, 0.3);
+      .nav-menu-container {
+        width: 100%;
+        max-height: 0;
         overflow: hidden;
-        pointer-events: none;
+        transition: max-height 0.5s cubic-bezier(0.2, 0.9, 0.4, 1), margin 0.3s;
+        margin-top: 0;
       }
-      nav.active {
-        transform: translateX(-50%) scaleY(1);
-        opacity: 1;
-        pointer-events: all;
-        padding: 1.8rem 1.5rem;
+      .nav-menu-container.active {
+        max-height: 320px;
+        margin-top: 1.2rem;
       }
       nav ul {
         flex-direction: column;
-        gap: 1.6rem;
+        gap: 1.2rem;
         align-items: center;
+        padding: 0.8rem 0 1rem 0;
       }
       nav ul li a {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
+        padding: 6px 0;
       }
     }
 
-    /* Allgemeiner Text-Glow */
-    h2, h3, h4, p, .btn, .card i, .footer-col a, .copyright {
-      text-shadow: 0 0 4px rgba(160, 160, 220, 0.2);
-    }
-
-    .hero h2 {
-      text-shadow: 0 0 12px rgba(180, 180, 255, 0.3);
-    }
-
+    /* Hero Bereich - weniger modern, eher klassisch elegant */
     .hero {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 3rem 2rem 5rem;
+      padding: 2rem 2rem 4rem;
       text-align: center;
     }
 
     .hero h2 {
-      font-size: clamp(2.8rem, 8vw, 4.8rem);
-      font-weight: 800;
+      font-size: clamp(2.5rem, 7vw, 4rem);
+      font-weight: 700;
+      color: #1e1e2a;
       margin-bottom: 1rem;
-      background: linear-gradient(125deg, #ffffff, #c8c8f0, #a0a0ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      letter-spacing: -0.3px;
+    }
+
+    .hero .highlight {
+      color: #5a5a6e;
+      font-weight: 500;
     }
 
     .hero p {
       font-size: 1.2rem;
       max-width: 750px;
       margin: 1rem auto;
-      color: #cdcde0;
+      color: #3a3a4a;
+      line-height: 1.6;
     }
 
     .btn {
       display: inline-block;
-      margin-top: 1.5rem;
-      background: #1e1e2a;
-      padding: 0.9rem 2.5rem;
-      border-radius: 60px;
+      margin-top: 1.8rem;
+      background: #2c2c38;
+      padding: 0.85rem 2.2rem;
+      border-radius: 50px;
       text-decoration: none;
-      color: #f0f0ff;
-      font-weight: 600;
-      transition: all 0.25s;
-      border: 1px solid rgba(140, 140, 200, 0.5);
-      box-shadow: 0 0 12px rgba(100, 100, 200, 0.2);
+      color: white;
+      font-weight: 500;
+      transition: 0.2s;
+      border: 1px solid #6a6a7a;
     }
 
     .btn:hover {
-      background: #2a2a38;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4), 0 0 18px rgba(130, 130, 255, 0.5);
-      border-color: #aaaaff;
+      background: #3e3e4e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
     }
 
-    .section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 5rem 2rem;
+    /* Nur eine Box mit drei Säulen (unsere Werte / Leistungen kompakt) */
+    .value-section {
+      max-width: 1100px;
+      margin: 2rem auto 4rem;
+      padding: 0 2rem;
     }
 
-    .section h3 {
-      font-size: 2rem;
-      font-weight: 700;
+    .value-section h3 {
+      font-size: 1.9rem;
+      font-weight: 600;
       margin-bottom: 2rem;
-      color: #f0f0ff;
-      border-left: 4px solid #8888cc;
-      padding-left: 1.2rem;
-      text-shadow: 0 0 6px rgba(120,120,200,0.4);
+      text-align: center;
+      color: #1e1e2a;
+      letter-spacing: -0.2px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    .single-box-grid {
+      display: flex;
+      flex-wrap: wrap;
       gap: 2rem;
+      justify-content: center;
     }
 
-    .card {
-      background: rgba(20, 20, 28, 0.7);
-      backdrop-filter: blur(4px);
-      border-radius: 32px;
-      padding: 2rem;
-      transition: 0.3s;
-      border: 1px solid #2e2e3a;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    .value-card {
+      flex: 1;
+      min-width: 240px;
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 2rem 1.8rem;
+      text-align: center;
+      transition: 0.25s;
+      border: 1px solid #e0e0e8;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02);
     }
 
-    .card:hover {
-      transform: translateY(-8px);
-      background: rgba(28, 28, 38, 0.9);
-      border-color: #6a6a9a;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 20px rgba(100, 100, 200, 0.2);
+    .value-card:hover {
+      transform: translateY(-5px);
+      border-color: #bcbccc;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
     }
 
-    .card i {
-      font-size: 2.5rem;
-      color: #c0c0ff;
+    .value-card i {
+      font-size: 2.4rem;
+      color: #4a4a60;
       margin-bottom: 1rem;
-      filter: drop-shadow(0 0 5px #8f8fff);
     }
 
-    .card h4 {
-      font-size: 1.5rem;
-      margin-bottom: 0.8rem;
+    .value-card h4 {
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+      font-weight: 600;
+      color: #1e1e2a;
+    }
+
+    .value-card p {
+      color: #4a4a5a;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Zusätzlicher Bereich: Über uns + Ausstattung + Region */
+    .info-block {
+      max-width: 1100px;
+      margin: 2rem auto 3rem;
+      padding: 0 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-between;
+    }
+
+    .info-text {
+      flex: 2;
+      background: #ffffffdd;
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 2rem;
+      border: 1px solid #e8e8f0;
+    }
+
+    .info-text h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
       font-weight: 600;
     }
 
-    .card p {
-      color: #b8b8cc;
+    .info-text p {
+      margin-bottom: 1rem;
+      color: #3a3a4a;
+      line-height: 1.6;
     }
 
+    .info-list {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .info-list li {
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-list i {
+      color: #5a5a72;
+      width: 24px;
+    }
+
+    .contact-card-small {
+      flex: 1;
+      background: #fafaf7;
+      border-radius: 28px;
+      padding: 2rem;
+      border: 1px solid #e0e0e8;
+    }
+
+    .contact-card-small h4 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-card-small p {
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+    }
+
+    /* Footer bleibt gleich, Logo wird unten links hinzugefügt */
     footer {
-      background: rgba(6, 6, 10, 0.95);
-      border-top: 1px solid #252535;
+      background: #101014;
+      border-top: 1px solid #2a2a30;
       padding: 3rem 2rem 2rem;
-      margin-top: 3rem;
-      backdrop-filter: blur(2px);
+      margin-top: 4rem;
+      color: #ccc;
     }
 
     .footer-content {
@@ -342,7 +349,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      gap: 2.5rem;
+      gap: 2rem;
     }
 
     .footer-col {
@@ -352,153 +359,146 @@
 
     .footer-col h4 {
       margin-bottom: 1rem;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 600;
-      color: #ddddee;
+      color: #ddd;
     }
 
     .footer-col p, .footer-col a {
-      color: #9a9ab0;
+      color: #9a9aaa;
       text-decoration: none;
-      font-size: 0.9rem;
-      line-height: 1.8;
+      font-size: 0.85rem;
+      line-height: 1.7;
     }
 
     .footer-col a:hover {
       color: #ffffff;
-      text-shadow: 0 0 5px #aaaaff;
+    }
+
+    .footer-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo-img {
+      height: 42px;
+      width: auto;
+      filter: brightness(0.9);
     }
 
     .copyright {
       text-align: center;
       padding-top: 2rem;
-      font-size: 0.8rem;
-      color: #6a6a82;
-      border-top: 1px solid #1f1f2a;
+      font-size: 0.75rem;
+      color: #6a6a7a;
+      border-top: 1px solid #22222a;
       margin-top: 2rem;
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 800px) {
+      .info-block {
+        flex-direction: column;
+      }
+      .value-card {
+        min-width: 220px;
+      }
       .footer-content {
         flex-direction: column;
         text-align: center;
-        gap: 1.8rem;
       }
-      .section {
-        padding: 3rem 1.5rem;
-      }
-      .hero {
-        padding: 2rem 1.5rem 4rem;
-      }
-      .footer-col {
-        text-align: center;
+      .footer-logo-area {
+        justify-content: center;
       }
     }
   </style>
 </head>
 <body>
 
-<canvas id="particleCanvas"></canvas>
-
 <header id="mainHeader">
   <div class="logo">
     <img src="logo.png" alt="Velona Logo" class="logo-img" onerror="this.style.display='none'">
     <div class="logo-text">
       <h1>Velona</h1>
-      <p>Gebäudereinigung</p>
+      <p>Reinigung</p>
     </div>
   </div>
   <div class="menu-icon" id="menuToggle">
     <i class="fas fa-bars"></i>
   </div>
-  <nav id="navMenu">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/about">Über uns</a></li>
-      <li><a href="/kontakt">Kontakt</a></li>
-    </ul>
-  </nav>
+  <div class="nav-menu-container" id="navMenuContainer">
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">Über uns</a></li>
+        <li><a href="/kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
 <main>
   <section class="hero fade-element">
-    <h2>Velona Gebäudereinigung</h2>
-    <p>Ihr zuverlässiger Partner für strahlende Sauberkeit – ob im Unternehmen, in privaten Haushalten oder bei Jugend- und Bildungseinrichtungen. Bei uns zählt jedes Detail, damit Sie sich rundum wohlfühlen.</p>
+    <h2>Velona Reinigung</h2>
+    <p>Ihre zuverlässige Reinigung aus <strong>Füssen</strong> – für Kindergärten, Privathaushalte, Geschäfte und mehr. Mutter & Tochter mit Leidenschaft und dem perfekten Equipment.</p>
     <a href="/kontakt" class="btn">Kontakt aufnehmen <i class="fas fa-arrow-right"></i></a>
   </section>
 
-  <section class="section fade-element">
-    <h3>Das bieten wir</h3>
-    <div class="grid">
-      <div class="card">
-        <i class="fas fa-building"></i>
-        <h4>Für Unternehmen</h4>
-        <p>Büros, Praxisräume, Geschäfte und Gewerbeflächen – wir sorgen für professionelle Hygiene und einen gepflegten ersten Eindruck bei Ihren Kunden.</p>
-      </div>
-      <div class="card">
-        <i class="fas fa-home"></i>
-        <h4>Für Privathaushalte</h4>
-        <p>Wohnungen, Häuser, Ferienwohnungen: Gründliche Reinigung nach Ihren Wünschen. Entlastung im Alltag mit höchstem Qualitätsanspruch.</p>
-      </div>
-      <div class="card">
-        <i class="fas fa-chalkboard-user"></i>
-        <h4>Für Jugend- & Bildungsträger</h4>
-        <p>Jugendtreffs, Schulen, Kindergärten – wir schaffen hygienisch einwandfreie Räume, in denen sich Kinder, Jugendliche und Teams wohlfühlen können.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section fade-element">
-    <h3>Unser Versprechen</h3>
-    <div class="grid">
-      <div class="card">
+  <!-- Nur eine Box mit 3 Säulen: Unsere Werte / Was wir bieten -->
+  <div class="value-section fade-element">
+    <h3>Was uns ausmacht</h3>
+    <div class="single-box-grid">
+      <div class="value-card">
         <i class="fas fa-hand-sparkles"></i>
-        <h4>Gründlich & Fair</h4>
-        <p>Wir verwenden moderne, umweltschonende Reinigungsmittel und arbeiten präzise, ohne Kompromisse bei der Sauberkeit.</p>
+        <h4>Perfekte Ausstattung</h4>
+        <p>Moderne Geräte, professionelle Mittel – wir haben jedes Tool, um jede Oberfläche makellos sauber zu hinterlassen.</p>
       </div>
-      <div class="card">
-        <i class="fas fa-clock"></i>
-        <h4>Pünktlich & Flexibel</h4>
-        <p>Termine, die passen – ob regelmäßige Unterhaltsreinigung oder einmalige Grundreinigung. Wir richten uns nach Ihrem Zeitplan.</p>
+      <div class="value-card">
+        <i class="fas fa-heart"></i>
+        <h4>Familiengeist & Leidenschaft</h4>
+        <p>Geführt mit Herzblut von Mutter und Tochter. Kundennähe und Verlässlichkeit stehen bei uns an erster Stelle.</p>
       </div>
-      <div class="card">
-        <i class="fas fa-star"></i>
-        <h4>100 % Zuverlässigkeit</h4>
-        <p>Freundliches, geschultes Personal und stetige Qualitätskontrollen machen uns zu Ihrem verlässlichen Reinigungspartner vor Ort.</p>
+      <div class="value-card">
+        <i class="fas fa-building"></i>
+        <h4>Alles im Blick</h4>
+        <p>Kitas, Büros, Privathäuser, Ladengeschäfte – wir reinigen, wo andere nur zögern. Gründlich & fair.</p>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class="section fade-element">
-    <h3>Kontakt & Anfahrt</h3>
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));">
-      <div class="card">
-        <i class="fas fa-phone-alt"></i>
-        <h4>Telefon</h4>
-        <p><strong>+49 171 9211444</strong></p>
-        <p style="margin-top: 8px; font-size:0.85rem;">Erreichbarkeit:<br>Mo–Fr: 09:00 – 19:00 Uhr<br>Samstag: 09:00 – 12:00 Uhr</p>
-      </div>
-      <div class="card">
-        <i class="fas fa-envelope"></i>
-        <h4>E-Mail</h4>
-        <p>info@velona-reinigung.de</p>
-        <p style="margin-top: 8px; font-size:0.85rem;">Wir antworten innerhalb von 24 Stunden.</p>
-      </div>
-      <div class="card">
-        <i class="fas fa-location-dot"></i>
-        <h4>Adresse</h4>
-        <p><strong>Seeweg 4</strong><br>87629 Füssen<br>Deutschland</p>
-        <p style="margin-top: 8px; font-size:0.85rem;">Besuche nach vorheriger Terminvereinbarung.</p>
-      </div>
+  <!-- Detaillierter Info Bereich: Über uns, Region, Ausstattung -->
+  <div class="info-block fade-element">
+    <div class="info-text">
+      <h3>Velona – Ihre Reinigung in Füssen & Umgebung</h3>
+      <p>Wir sind ein familiengeführtes Unternehmen aus dem schönen Füssen. Meine Mutter und meine große Schwester bringen jede Menge Erfahrung mit – vom Kindergarten bis zur Gewerbefläche. Unser Anspruch: Jeder Auftrag wird mit derselben Hingabe behandelt.</p>
+      <p>Ob Wohnungsreinigung, Grundreinigung nach Umzug, Unterhaltsreinigung für Geschäfte oder die wöchentliche Kita-Säuberung – wir stellen uns jeder Aufgabe. Dabei nutzen wir ausschließlich hochwertige Reinigungsmittel und moderne Maschinen.</p>
+      <ul class="info-list">
+        <li><i class="fas fa-check-circle"></i> Kindergärten & Schulen</li>
+        <li><i class="fas fa-check-circle"></i> Private Haushalte & Wohnungen</li>
+        <li><i class="fas fa-check-circle"></i> Geschäfte, Büros & Praxisräume</li>
+        <li><i class="fas fa-check-circle"></i> Individuelle Sonderreinigungen</li>
+      </ul>
     </div>
-  </section>
+    <div class="contact-card-small">
+      <h4><i class="fas fa-phone-alt"></i> Kontakt</h4>
+      <p><strong>+49 171 9211444</strong></p>
+      <p>Mo–Fr: 09:00 – 19:00 Uhr<br>Sa: 09:00 – 12:00 Uhr</p>
+      <p><i class="fas fa-envelope"></i> info@velona-reinigung.de</p>
+      <p><i class="fas fa-map-marker-alt"></i> Seeweg 4, 87629 Füssen</p>
+      <p style="margin-top: 12px;">✓ Schnelle Angebote<br>✓ Familiäre Atmosphäre</p>
+    </div>
+  </div>
 </main>
 
 <footer>
   <div class="footer-content">
     <div class="footer-col">
-      <h4>Velona Gebäudereinigung</h4>
-      <p>Sauberkeit mit Charakter – für Unternehmen, Haushalte und Jugendtreffs.<br>Immer nah an Ihren Bedürfnissen.</p>
+      <div class="footer-logo-area">
+        <img src="logo.png" alt="Velona" class="footer-logo-img" onerror="this.style.display='none'">
+        <span style="font-weight: 600; color:#ccc;">Velona Reinigung</span>
+      </div>
+      <p>Ihre Reinigungsexpertinnen aus Füssen – sauber, zuverlässig, mit Herz.</p>
     </div>
     <div class="footer-col">
       <h4>Navigation</h4>
@@ -513,21 +513,21 @@
     </div>
   </div>
   <div class="copyright">
-    © 2026 Velona Gebäudereinigung – Professionelle Sauberkeit in Füssen & Umgebung.
+    © 2026 Velona Reinigung – Familienbetrieb aus Füssen. Sauberkeit mit Charakter.
   </div>
 </footer>
 
 <script>
   (function() {
-    // Mobile Menu: fließende Header-Erweiterung + Menü-Animation
-    const menuIcon = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('navMenu');
+    // MOBILE MENU: HEADER STRETCHT SICH SMOOTH NACH UNTEN (NICHT ZWEITER FRAME)
+    const menuToggle = document.getElementById('menuToggle');
+    const navContainer = document.getElementById('navMenuContainer');
     const mainHeader = document.getElementById('mainHeader');
-    
-    if (menuIcon && navMenu) {
-      menuIcon.addEventListener('click', function(e) {
+
+    if (menuToggle && navContainer) {
+      menuToggle.addEventListener('click', function(e) {
         e.stopPropagation();
-        const isActive = navMenu.classList.toggle('active');
+        const isActive = navContainer.classList.toggle('active');
         if (isActive) {
           mainHeader.classList.add('menu-open');
         } else {
@@ -535,15 +535,15 @@
         }
       });
       document.addEventListener('click', function(event) {
-        if (!navMenu.contains(event.target) && !menuIcon.contains(event.target) && navMenu.classList.contains('active')) {
-          navMenu.classList.remove('active');
+        if (!navContainer.contains(event.target) && !menuToggle.contains(event.target) && navContainer.classList.contains('active')) {
+          navContainer.classList.remove('active');
           mainHeader.classList.remove('menu-open');
         }
       });
-      const navLinks = navMenu.querySelectorAll('a');
+      const navLinks = navContainer.querySelectorAll('a');
       navLinks.forEach(link => {
         link.addEventListener('click', () => {
-          navMenu.classList.remove('active');
+          navContainer.classList.remove('active');
           mainHeader.classList.remove('menu-open');
         });
       });
@@ -559,10 +559,10 @@
           entry.target.classList.remove('visible');
         }
       });
-    }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
+    }, { threshold: 0.1, rootMargin: "0px 0px -15px 0px" });
     fadeElements.forEach(el => observer.observe(el));
 
-    // Scroll Header verstecken
+    // Scroll Header hide/show (smooth)
     const header = document.querySelector('header');
     let lastScroll = 0;
     window.addEventListener('scroll', () => {
@@ -577,9 +577,9 @@
       lastScroll = currentScroll;
     });
 
-    // Interne Links / Routing Simulation
-    const allInternalLinks = document.querySelectorAll('nav ul li a, .btn, .footer-col a');
-    allInternalLinks.forEach(anchor => {
+    // Links simulieren (router)
+    const allInternal = document.querySelectorAll('nav ul li a, .btn, .footer-col a');
+    allInternal.forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
         if (href && (href === '/' || href === '/about' || href === '/kontakt' || href === '/impressum' || href === '/datenschutz')) {
@@ -589,93 +589,16 @@
       });
     });
 
-    // ---- Partikel Hintergrund mit Glow-Effekt (fliegende Punkte) ----
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let animationId = null;
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    // Tab-Icon über das link rel="icon" bereits definiert (logo.png)
+    // Zusätzlich für bessere Sichtbarkeit: favicon kann auch größer skaliert werden – aber Browser skaliert automatisch.
+    // Um das tab-icon "größer" wirken zu lassen, kann man eine zweite Icon-Größe angeben, reicht aber:
+    const linkIcon = document.querySelector("link[rel='icon']");
+    if (linkIcon && linkIcon.href) {
+      // keine Änderung nötig, das Logo wird als tab-icon verwendet.
     }
 
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1.5;
-        this.speedX = (Math.random() - 0.5) * 0.4;
-        this.speedY = (Math.random() - 0.5) * 0.3 + 0.2;
-        this.opacity = Math.random() * 0.4 + 0.15;
-        this.color = `rgba(160, 160, 230, ${this.opacity})`;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0) this.x = canvas.width;
-        if (this.x > canvas.width) this.x = 0;
-        if (this.y < 0) this.y = canvas.height;
-        if (this.y > canvas.height) this.y = 0;
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = 'rgba(160, 160, 255, 0.7)';
-        ctx.fill();
-      }
-    }
-
-    function initParticles() {
-      particles = [];
-      const particleCount = Math.min(80, Math.floor(window.innerWidth / 20));
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-      }
-    }
-
-    function animateParticles() {
-      if (!ctx) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.shadowBlur = 0;
-      for (let p of particles) {
-        p.update();
-        p.draw();
-      }
-      animationId = requestAnimationFrame(animateParticles);
-    }
-
-    function setupParticles() {
-      resizeCanvas();
-      initParticles();
-      animateParticles();
-    }
-
-    window.addEventListener('resize', () => {
-      resizeCanvas();
-      initParticles();
-    });
-
-    setupParticles();
-
-    const style = document.createElement('style');
-    style.textContent = `
-      header {
-        transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1), opacity 0.3s ease, background 0.3s, border-radius 0.3s, padding 0.3s, box-shadow 0.3s;
-        will-change: transform;
-      }
-      @media (max-width: 768px) {
-        header {
-          top: 15px;
-        }
-      }
-      .logo-img {
-        object-fit: contain;
-      }
-    `;
-    document.head.appendChild(style);
+    // Alles clean, keine glow/partikel, kein unnötiger Hintergrund.
+    // Und kein moderner "Verkaufs"-Look, klassisch elegant.
   })();
 </script>
 </body>
