@@ -32,10 +32,11 @@
       position: relative;
     }
 
+    /* Fade-In Elemente - unabhängig von Scroll-Geschwindigkeit */
     .fade-element {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.85s cubic-bezier(0.15, 0.85, 0.25, 1), transform 0.85s cubic-bezier(0.15, 0.85, 0.25, 1);
+      transform: translateY(25px);
+      transition: opacity 0.9s cubic-bezier(0.25, 0.95, 0.4, 1), transform 0.9s cubic-bezier(0.25, 0.95, 0.4, 1);
       will-change: opacity, transform;
     }
 
@@ -44,6 +45,7 @@
       transform: translateY(0);
     }
 
+    /* Header - Basis Styling */
     header {
       position: fixed;
       top: 20px;
@@ -61,18 +63,20 @@
       z-index: 1000;
       border: 1px solid rgba(220, 220, 230, 0.15);
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1), opacity 0.3s ease;
+      transition: transform 0.45s cubic-bezier(0.2, 0.95, 0.4, 1), opacity 0.4s ease;
       will-change: transform, opacity;
     }
 
-    header.header-hidden {
-      transform: translateX(-50%) translateY(-120%);
-      opacity: 0;
-    }
-
+    /* Header sichtbar */
     header.header-visible {
       transform: translateX(-50%) translateY(0);
       opacity: 1;
+    }
+
+    /* Header versteckt */
+    header.header-hidden {
+      transform: translateX(-50%) translateY(-150%);
+      opacity: 0;
     }
 
     header.menu-open {
@@ -138,6 +142,7 @@
         flex-wrap: wrap;
         padding: 0.8rem 1.5rem;
         width: 92%;
+        top: 15px;
       }
       .logo-img {
         height: 44px;
@@ -228,7 +233,6 @@
       margin-top: 2rem;
     }
 
-    /* BEIDE BUTTONS: 1:1 gleiches Design, nur unterschiedliche Farben */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -251,7 +255,6 @@
       box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
     }
 
-    /* WhatsApp Button: exakt gleiches Styling, nur grün */
     .btn-whatsapp {
       display: inline-flex;
       align-items: center;
@@ -622,7 +625,7 @@
 
 <script>
   (function() {
-    // MOBILE MENU
+    // MOBILE MENU - Verbessert
     const menuToggle = document.getElementById('menuToggle');
     const navContainer = document.getElementById('navMenuContainer');
     const mainHeader = document.getElementById('mainHeader');
@@ -637,12 +640,14 @@
           mainHeader.classList.remove('menu-open');
         }
       });
+      
       document.addEventListener('click', function(event) {
         if (!navContainer.contains(event.target) && !menuToggle.contains(event.target) && navContainer.classList.contains('active')) {
           navContainer.classList.remove('active');
           mainHeader.classList.remove('menu-open');
         }
       });
+      
       const navLinks = navContainer.querySelectorAll('a');
       navLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -652,8 +657,9 @@
       });
     }
 
-    // FADE IN OBSERVER
+    // FADE-IN OBSERVER - Stabile Animation, unabhängig von Scroll-Geschwindigkeit
     const fadeElements = document.querySelectorAll('.fade-element');
+    
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -662,44 +668,55 @@
           entry.target.classList.remove('visible');
         }
       });
-    }, { threshold: 0.12, rootMargin: "0px 0px -20px 0px" });
+    }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+    
     fadeElements.forEach(el => observer.observe(el));
 
-    // HEADER SCROLL ANIMATION - OHNE BUG, MIT TIMEOUT SCHUTZ
+    // HEADER SCROLL ANIMATION - Perfekt, kein Bug, keine Instant-Verschiebung
     const header = document.getElementById('mainHeader');
-    let lastScroll = 0;
-    let isAnimating = false;
-    let animationTimeout = null;
+    let lastScrollY = 0;
+    let ticking = false;
+    let headerVisible = true;
     
-    function setHeaderVisibility(visible) {
-      if (isAnimating) return;
-      isAnimating = true;
+    function updateHeaderVisibility() {
+      const currentScrollY = window.scrollY;
       
-      if (visible) {
-        header.classList.remove('header-hidden');
-        header.classList.add('header-visible');
-      } else {
-        header.classList.remove('header-visible');
-        header.classList.add('header-hidden');
+      if (currentScrollY <= 20) {
+        if (!headerVisible) {
+          headerVisible = true;
+          header.classList.remove('header-hidden');
+          header.classList.add('header-visible');
+        }
+      } 
+      else if (currentScrollY > lastScrollY + 5 && currentScrollY > 80) {
+        if (headerVisible) {
+          headerVisible = false;
+          header.classList.remove('header-visible');
+          header.classList.add('header-hidden');
+        }
+      }
+      else if (currentScrollY < lastScrollY - 5) {
+        if (!headerVisible) {
+          headerVisible = true;
+          header.classList.remove('header-hidden');
+          header.classList.add('header-visible');
+        }
       }
       
-      if (animationTimeout) clearTimeout(animationTimeout);
-      animationTimeout = setTimeout(() => {
-        isAnimating = false;
-      }, 450);
+      lastScrollY = currentScrollY;
+      ticking = false;
     }
     
     window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-      if (currentScroll > lastScroll && currentScroll > 120) {
-        setHeaderVisibility(false);
-      } else if (currentScroll < lastScroll) {
-        setHeaderVisibility(true);
-      } else if (currentScroll <= 50) {
-        setHeaderVisibility(true);
+      if (!ticking) {
+        requestAnimationFrame(updateHeaderVisibility);
+        ticking = true;
       }
-      lastScroll = currentScroll;
     });
+    
+    // Initial setzen
+    header.classList.add('header-visible');
+    header.classList.remove('header-hidden');
 
     // WHATSAPP BUTTON
     const whatsappNumber = '491719211444';
@@ -712,7 +729,7 @@
       });
     }
 
-    // INTERNE LINKS
+    // INTERNE LINKS (Routing Simulation)
     const allLinks = document.querySelectorAll('nav ul li a, .btn, .footer-col a');
     allLinks.forEach(anchor => {
       anchor.addEventListener('click', function(e) {
