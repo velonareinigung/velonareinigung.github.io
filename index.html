@@ -59,9 +59,20 @@
       align-items: center;
       justify-content: space-between;
       z-index: 1000;
-      transition: all 0.45s cubic-bezier(0.2, 0.95, 0.3, 1.1);
       border: 1px solid rgba(220, 220, 230, 0.15);
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1), opacity 0.3s ease;
+      will-change: transform, opacity;
+    }
+
+    header.header-hidden {
+      transform: translateX(-50%) translateY(-120%);
+      opacity: 0;
+    }
+
+    header.header-visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
     }
 
     header.menu-open {
@@ -181,7 +192,7 @@
       background-image: url('header.png');
       background-size: cover;
       background-position: center;
-      opacity: 0.25;
+      opacity: 0.12;
       z-index: 0;
     }
 
@@ -217,6 +228,7 @@
       margin-top: 2rem;
     }
 
+    /* BEIDE BUTTONS: 1:1 gleiches Design, nur unterschiedliche Farben */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -239,19 +251,27 @@
       box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
     }
 
+    /* WhatsApp Button: exakt gleiches Styling, nur grün */
     .btn-whatsapp {
-      background: #25D366;
-      border: none;
-      color: white;
       display: inline-flex;
       align-items: center;
       gap: 10px;
+      background: #25D366;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.25s ease;
+      border: none;
+      cursor: pointer;
     }
 
     .btn-whatsapp:hover {
       background: #20b859;
       transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(37, 211, 102, 0.35);
+      box-shadow: 0 6px 14px rgba(37, 211, 102, 0.3);
     }
 
     .white-section {
@@ -490,7 +510,7 @@
 </head>
 <body>
 
-<header id="mainHeader">
+<header id="mainHeader" class="header-visible">
   <div class="logo">
     <img src="logo.png" alt="Velona Logo" class="logo-img" onerror="this.style.display='none'">
     <div class="logo-text">
@@ -602,6 +622,7 @@
 
 <script>
   (function() {
+    // MOBILE MENU
     const menuToggle = document.getElementById('menuToggle');
     const navContainer = document.getElementById('navMenuContainer');
     const mainHeader = document.getElementById('mainHeader');
@@ -631,6 +652,7 @@
       });
     }
 
+    // FADE IN OBSERVER
     const fadeElements = document.querySelectorAll('.fade-element');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -643,26 +665,44 @@
     }, { threshold: 0.12, rootMargin: "0px 0px -20px 0px" });
     fadeElements.forEach(el => observer.observe(el));
 
-    const header = document.querySelector('header');
+    // HEADER SCROLL ANIMATION - OHNE BUG, MIT TIMEOUT SCHUTZ
+    const header = document.getElementById('mainHeader');
     let lastScroll = 0;
+    let isAnimating = false;
+    let animationTimeout = null;
+    
+    function setHeaderVisibility(visible) {
+      if (isAnimating) return;
+      isAnimating = true;
+      
+      if (visible) {
+        header.classList.remove('header-hidden');
+        header.classList.add('header-visible');
+      } else {
+        header.classList.remove('header-visible');
+        header.classList.add('header-hidden');
+      }
+      
+      if (animationTimeout) clearTimeout(animationTimeout);
+      animationTimeout = setTimeout(() => {
+        isAnimating = false;
+      }, 450);
+    }
+    
     window.addEventListener('scroll', () => {
       const currentScroll = window.pageYOffset;
       if (currentScroll > lastScroll && currentScroll > 120) {
-        header.style.transform = 'translateX(-50%) translateY(-120%)';
-        header.style.opacity = '0';
-      } else {
-        header.style.transform = 'translateX(-50%) translateY(0)';
-        header.style.opacity = '1';
+        setHeaderVisibility(false);
+      } else if (currentScroll < lastScroll) {
+        setHeaderVisibility(true);
+      } else if (currentScroll <= 50) {
+        setHeaderVisibility(true);
       }
       lastScroll = currentScroll;
     });
 
-    // WhatsApp Button - perfekt gestylt
-    // HIER MUSST DU DEINE ECHTE WHATSAPP NUMMER EINTRAGEN!
-    // Format: Ländercode + Nummer ohne führende Null, ohne Leerzeichen, ohne +
-    // Beispiel für Deutschland: 491719211444 (für +49 171 9211444)
-    const whatsappNumber = '491719211444'; // <-- ERSETZE DIES MIT DEINER ECHTEN WHATSAPP NUMMER
-    
+    // WHATSAPP BUTTON
+    const whatsappNumber = '491719211444';
     const whatsappBtn = document.getElementById('whatsappBtn');
     if (whatsappBtn) {
       whatsappBtn.addEventListener('click', function(e) {
@@ -672,6 +712,7 @@
       });
     }
 
+    // INTERNE LINKS
     const allLinks = document.querySelectorAll('nav ul li a, .btn, .footer-col a');
     allLinks.forEach(anchor => {
       anchor.addEventListener('click', function(e) {
